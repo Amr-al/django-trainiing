@@ -48,7 +48,7 @@ class Songs(models.Model):
         return super().save()
   
     def delete(self):
-        if Songs.objects.filter(id= self.song_album_id).count() == 1:
+        if Songs.objects.filter(song_album_id = self.song_album_id).count() == 1:
             raise Exception("can't delete all songs of an album")
         return super().delete()
 
