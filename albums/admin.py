@@ -7,13 +7,20 @@ from django.contrib.admin.options import TabularInline
 
 # admin.site.register(Album)
 
-class AlbumAdminInline(TabularInline):
-        extra = 0
-        model = Album
+#class AlbumAdminInline(TabularInline):
+#        extra = 0
+#        model = Album
+
+class SongTabular(admin.TabularInline):
+    extra = 0
+    model = Songs
+
+admin.site.register(Songs)
+
 
 @admin.register(Artist)
 class ArtistAdmin(admin.ModelAdmin):
-   inlines = (AlbumAdminInline,)
+  # inlines = (AlbumAdminInline,)
    readonly_fields = ('NumberOfApproved',)
 
    def NumberOfApproved(self, obj):
@@ -21,6 +28,7 @@ class ArtistAdmin(admin.ModelAdmin):
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
+     inlines = [SongTabular] 
      readonly_fields = ['creation_datetime']
      list_display = ['name', 'creation_datetime' ]
      def get_form(self, request, obj=None, change=False, **kwargs):
