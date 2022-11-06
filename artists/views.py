@@ -4,11 +4,14 @@ from django.http import JsonResponse
 from django.core import serializers
 from .models import *
 from .froms import *
+from .serializers import *
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.permissions import IsAuthenticated,AllowAny, IsAdminUser
+from rest_framework import generics
 import json
 # Create your views 
-
+'''
 class ArtistView(View):
     def post(self,request):
         try:
@@ -24,7 +27,7 @@ class ArtistView(View):
         data = serializers.serialize('json',Artist.objects.all())
         return JsonResponse(json.loads(data) , safe= False)
 
-class ArtistView2(LoginRequiredMixin, View):
+class ArtistView2(View):
     
     def get(self,request,id):
         try:
@@ -51,3 +54,14 @@ class ArtistView2(LoginRequiredMixin, View):
             return JsonResponse(form.errors, status=422)
         except:
             return JsonResponse({'message':'invalid format'},status = 500)
+'''
+
+
+class ArtistView(generics.ListCreateAPIView):
+     queryset = Artist.objects.all()
+     serializer_class = ArtistSerializer
+
+class ArtistView2(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer

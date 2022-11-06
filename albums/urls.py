@@ -4,5 +4,5 @@ from .views import *
 
 urlpatterns = [
     path('', AlbumView.as_view()),
-    path('<int:id>', AlbumView2.as_view()),
+    path('<int:pk>', AlbumView2.as_view()),
 ]

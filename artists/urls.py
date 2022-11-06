@@ -4,5 +4,5 @@ from .views import *
 
 urlpatterns = [
     path('', ArtistView.as_view()),
-    path('<int:id>', ArtistView2.as_view()),
+    path('<int:pk>', ArtistView2.as_view()),
 ]

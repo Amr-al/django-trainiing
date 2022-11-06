@@ -3,8 +3,15 @@ from django.views import View
 from django.http import JsonResponse
 from django.core import serializers
 from .models import *
+from .serializers import *
+from rest_framework.views import APIView
+from rest_framework import mixins
+from rest_framework import status
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated,AllowAny, IsAdminUser
 import json
 # Create your views 
+'''
 class AlbumView(View):
     def post(self, request):
         try:
@@ -42,3 +49,13 @@ class AlbumView2(View):
             return JsonResponse('Album is not exist', safe=False)
         data = serializers.serialize('json', Album.objects.all())
         return JsonResponse(json.loads(data), safe=False)
+'''
+
+class AlbumView(generics.ListCreateAPIView):
+     queryset = Album.objects.all()
+     serializer_class = AlbumSerializer
+
+class AlbumView2(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
