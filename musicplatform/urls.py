@@ -24,7 +24,9 @@ urlpatterns = [
     path('Artists/',include('artists.urls')),
     path('Albums/',include('albums.urls')),
     path('login/', myview.LoginView.as_view()),
-    path('logout/', myview.LogoutView.as_view())
+    path('logout/', myview.LogoutView.as_view()),
+    path('authentication/' , include('authentication.urls')),
+    path('user/' ,include('users.urls')),
 ]
 if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

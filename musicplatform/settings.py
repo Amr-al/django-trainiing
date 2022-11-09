@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_extensions',
+    'knox',
     'artists',
     'albums',
-    'imagekit'
+    'imagekit',
+    'authentication',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -55,6 +59,20 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'musicplatform.urls'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'knox.auth.TokenAuthentication',
+    ]
+}
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.ScryptPasswordHasher',
+]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -131,3 +149,4 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'mymedia'), )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/' 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mymedia')
+AUTH_USER_MODEL = 'users.User'
