@@ -28,7 +28,7 @@ class LoginAPI(generics.GenericAPIView):
         return Response({
             "token": AuthToken.objects.create(user)[1],
             "user": alldata.data
-            
+
         })
 
 
@@ -42,5 +42,5 @@ class Register(APIView):
                 "email": serializer.data['email'],
                 "password": serializer.data['password1']})
         else:
-            return Response(serializer.errors)
+            return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
 
