@@ -7,3 +7,8 @@ class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
         fields = '__all__'
+
+class NewAlbumSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Album
+        fields = ['name','release_datetime','cost','approved']

@@ -6,7 +6,7 @@ from django.core.validators import FileExtensionValidator
 
     
 class Album(models.Model):
-    name = models.CharField(max_length = 50,default = 'New Album')
+    name              = models.CharField(max_length = 50,default = 'NewAlbum')
     creation_datetime = models.DateTimeField(auto_now_add=True)
     release_datetime  = models.DateTimeField(blank = False)
     artist            = models.ForeignKey(Artist,related_name = 'albums',on_delete = models.CASCADE)
@@ -21,11 +21,11 @@ class Album(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self):
-        data = Songs.objects.filter(song_album_id = self.id)
-        if  not data:
-            raise Exception('Album must have at least one song')
-        return super().save()
+  #  def save(self):
+   #     data = Songs.objects.filter(song_album_id = self.id)
+        #if  not data:
+        #    raise Exception('Album must have at least one song')
+  #      return super().save()
 
 
 class Songs(models.Model):

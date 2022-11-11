@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_extensions',
+    'django_filters',
     'knox',
     'artists',
     'albums',
@@ -65,7 +66,11 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.BasicAuthentication',
         # 'rest_framework.authentication.SessionAuthentication',
         'knox.auth.TokenAuthentication',
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2,
+    
+
 }
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
@@ -144,10 +149,11 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = "/Artists"
+LOGIN_REDIRECT_URL = "/Artists/"
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'mymedia'), ) 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/' 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mymedia')
 AUTH_USER_MODEL = 'users.User'
+FILTERS_DEFAULT_LOOKUP_EXPR = 'icontains'

@@ -3,6 +3,8 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('', AlbumView.as_view()),
-    path('<int:pk>', AlbumView2.as_view()),
+    path('', AlbumsView.as_view()),
+    path('filter',AlbumsView2.as_view()),
+    path('<int:pk>', AlbumView.as_view()),
+    path('published/',AlbumsApprovedView.as_view()),
 ]
