@@ -32,7 +32,9 @@ class LoginAPI(generics.GenericAPIView):
         })
 
 
-class Register(APIView):
+class Register(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():

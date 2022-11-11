@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'knox',
     'artists',
     'albums',
+    'drf_multiple_model',
     'imagekit',
     'authentication',
     'users'

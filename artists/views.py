@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
 from django.core import serializers
+from rest_framework.views import APIView
 from .models import *
 from .froms import *
 from .serializers import *
@@ -9,6 +10,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.permissions import IsAuthenticated,AllowAny, IsAdminUser
 from rest_framework import generics
+from authentication.serializers import *
+from drf_multiple_model.views import ObjectMultipleModelAPIView
 import json
 # Create your views 
 '''
@@ -65,3 +68,8 @@ class ArtistView2(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
+
+class ArtistRegister(ObjectMultipleModelAPIView,APIView):
+    querylist = [
+        {'queryset': User.objects.all(), 'serializer_class': UserSerializer},
+        {'queryset': Artist.objects.all(), 'serializer_class': ArtistSerializer}]

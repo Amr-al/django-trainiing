@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from users.models import User
-from django.forms import ValidationError
+from artists.models import *
+from rest_framework.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password , check_password
 from django.contrib.auth import authenticate
 
