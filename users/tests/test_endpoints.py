@@ -42,9 +42,9 @@ class TestViews:
     def test_user_view3(self,fix):
         # Authenticated
         user={
-            'username':'mahmoud',
-            'email':'m@m.com',
-            'password':'mahmoud1',
+            'username':'amr',
+            'email':'amr@amr.com',
+            'password':'amr123',
         }
         client=fix(user)
         request=client.get('/user/1')
@@ -54,9 +54,9 @@ class TestViews:
     def test_user_view4(self,fix):
         # Not found
         user={
-            'username':'mahmoud',
-            'email':'m@m.com',
-            'password':'mahmoud1',
+            'username':'amr',
+            'email':'amr@amr.com',
+            'password':'amr123',
         }
         client=fix(user)
         request=client.get('/user/2')
@@ -65,14 +65,14 @@ class TestViews:
     def test_user_view5(self,fix):
         # Authenticated and update himself
         user={
-            'username':'mahmoud',
-            'email':'m@m.com',
-            'password':'mahmoud1',
+            'username':'amr',
+            'email':'amr@am.com',
+            'password':'amr123',
         }
         client=fix(user)
         request=client.put('/user/1',{
-            'username':'mahmoud',
-            'email':'m@m.com',
+            'username':'amr',
+            'email':'amr@amr.com',
             'bio':'this is bio'
         })
         assert request.status_code==200
@@ -80,22 +80,22 @@ class TestViews:
     def test_user_view6(self,fix):
         # Authenticated but can not update others
         user={
-            'username':'mahmoud',
-            'email':'m@m.com',
-            'password':'mahmoud1',
+            'username':'amr',
+            'email':'amr@am.com',
+            'password':'amr123',
         }
         client=fix(user)
         APIClient().post('/authentication/register/',{
-            'username':'mahmoud2',
-            'email':'m@m2.com',
-            'password1':'mahmoud2',
-            'password2':'mahmoud2'
+            'username':'amr2',
+            'email':'amr@amr2.com',
+            'password1':'amr222',
+            'password2':'amr222'
         },format='json')
         
         request=client.put('/user/2',{
-            'username':'mahmoud',
+            'username':'amr',
             'email':'m@m.com',
-            'bio':'this is bio'
+            'bio':'ksdngkdsnfs'
         })
         assert request.status_code==403
 
